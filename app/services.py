@@ -3,11 +3,15 @@ from bs4 import BeautifulSoup
 
 class CoronaService:
     def __init__(self):
-        self.url = 'https://www.worldometers.info/coronavirus/country/brazil/'
+        self.base_url = 'https://www.worldometers.info/coronavirus/'
 
-    def get_info(self):
+    def get_info(self, country=None):
         try:
-            response = requests.get(self.url)
+            url = self.base_url
+            if country:
+                url += f'country/{country}/'
+
+            response = requests.get(url)
         except Exception:
             raise Exception('Something gone bad on corona request')
 
