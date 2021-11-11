@@ -39,6 +39,7 @@ class CoronaService:
 class TweetService:
     def __init__(self):
         self.service = None
+        self.authenticate()
 
     def authenticate(self):
         api_key = os.environ.get('TWEET_API_KEY')
@@ -55,3 +56,9 @@ class TweetService:
             self.service = api
         except Exception:
             raise Exception('Something gone bad on tweet service auth')
+
+    def tweet(self, message):
+        try:
+            self.service.update_status(message)
+        except Exception:
+            raise Exception('Something gone bad when creating a tweet')
