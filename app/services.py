@@ -27,7 +27,8 @@ class CoronaService:
         return dict(
             cases=self.format_counter(container[0]),
             deaths=self.format_counter(container[1]),
-            recovered=self.format_counter(container[2])
+            recovered=self.format_counter(container[2]),
+            country=country
         )
 
     def format_counter(self, container):
