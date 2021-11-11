@@ -1,3 +1,4 @@
+import settings
 from services import CoronaService
 
 corona_service = CoronaService()
