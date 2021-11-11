@@ -1,4 +1,7 @@
 import requests
+import os
+from requests import api
+import tweepy
 from bs4 import BeautifulSoup
 
 class CoronaService:
@@ -32,3 +35,23 @@ class CoronaService:
         if not counter:
             return '0'
         return counter.strip()
+
+class TweetService:
+    def __init__(self):
+        self.service = None
+
+    def authenticate(self):
+        api_key = os.environ.get('TWEET_API_KEY')
+        api_secret = os.environ.get('TWEET_API_SECRET')
+        access_token = os.environ.get('TWEET_API_ACCESS_TOKEN')
+        access_secret = os.environ.get('TWEET_API_ACCESS_SECRET')
+
+        auth = tweepy.OAuthHandler(api_key, api_secret)
+        auth.set_access_token(access_token, access_secret)
+
+        try:
+            api = tweepy.API(auth)
+            api.verify_credentials()
+            self.service = api
+        except Exception:
+            raise Exception('Something gone bad on tweet service auth')
