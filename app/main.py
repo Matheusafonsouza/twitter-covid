@@ -1,3 +1,4 @@
-from tasks import corona_task
+from tasks import tl
 
-corona_task()
+if __name__ == "__main__":
+    tl.start(block=True)
